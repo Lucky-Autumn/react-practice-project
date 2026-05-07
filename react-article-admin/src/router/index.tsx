@@ -4,6 +4,7 @@ import AuthLayuout from "@/components/AuthLayout";
 import Login from "@/views/Login";
 import Reg from "@/views/Reg";
 import Root from "@/views/Root";
+import { action as regAction } from "@/views/Reg/index.action";
 
 const router = createBrowserRouter([
   {
@@ -21,6 +22,7 @@ const router = createBrowserRouter([
         <Reg />
       </AuthLayuout>
     ),
+    action: regAction,
   },
   {
     path: "/",
