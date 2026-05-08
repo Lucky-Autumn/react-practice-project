@@ -1,13 +1,16 @@
 import { regApi } from "@/api/auth";
-
+import type { ActionFunctionArgs } from "react-router";
 import { message } from "antd";
 import to from "await-to-js";
 import { redirect } from "react-router";
 
-export const action = async ({ request }: { request: Request }) => {
+export const action = async ({ request }: ActionFunctionArgs) => {
+  console.log(request);
   const formData = await request.formData();
 
-  const [err] = await to(regApi(formData));
+  const [err, response] = await to(regApi(formData));
+  console.log(err, response);
+
   if (err) {
     return null;
   }

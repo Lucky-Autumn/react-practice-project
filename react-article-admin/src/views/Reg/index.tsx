@@ -8,7 +8,8 @@ const Reg: React.FC = () => {
   const submit = useSubmit();
   const navigation = useNavigation();
   const onFinish = (values: RegFormValues) => {
-    submit(values, { method: "post", action: "/reg" });
+    console.log(values);
+    submit(values, { method: "post" });
   };
 
   return (
@@ -82,7 +83,7 @@ const Reg: React.FC = () => {
         >
           注 册
         </Button>
-        或者 <Link to="/login">立马登录!</Link>
+        或者 <Link to="/login">立即登录!</Link>
       </Form.Item>
     </Form>
   );

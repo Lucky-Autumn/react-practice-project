@@ -14,15 +14,18 @@ const apiClient = axios.create({
 apiClient.interceptors.request.use(
   (config) => {
     // 在发送请求之前，可以在这里添加一些公共的请求参数或进行其他处理
+    const url = config.url;
+    const method = config.method?.toUpperCase();
+
     if (
-      (config.url === "/my/article/add" && config.method === "POST") ||
-      (config.url === "/my/article/info" && config.method === "PUT")
+      (url === "/my/article/add" && method === "POST") ||
+      (url === "/my/article/info" && method === "PUT")
     ) {
       config.transformRequest = [];
     } else {
       config.transformRequest = requestTransform;
     }
-    return config.data;
+    return config;
   },
   (error) => {
     // 处理请求错误
@@ -42,8 +45,8 @@ apiClient.interceptors.response.use(
       return Promise.reject(error.response.data);
     } else {
       // 服务器异常或网络错误
-      message.error(error.code);
-      return Promise.reject({ code: 1, message: "服务器异常，请稍后再试" });
+      message.error(error.message);
+      return Promise.reject();
     }
   },
 );
@@ -55,5 +58,10 @@ const requestTransform: AxiosRequestTransformer = (data) => {
     return qs.stringify(data);
   }
 };
+
+export interface ApiResponse {
+  code: number;
+  message: string;
+}
 
 export default apiClient;

@@ -5,7 +5,7 @@ import Login from "@/views/Login";
 import Reg from "@/views/Reg";
 import Root from "@/views/Root";
 import { action as regAction } from "@/views/Reg/index.action";
-
+import { action as loginAction } from "@/views/Login/index.action";
 const router = createBrowserRouter([
   {
     path: "/login",
@@ -14,6 +14,7 @@ const router = createBrowserRouter([
         <Login />
       </AuthLayuout>
     ),
+    action: loginAction,
   },
   {
     path: "/reg",

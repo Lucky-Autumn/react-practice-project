@@ -3,3 +3,5 @@ export type RegFormValues = {
   password: string;
   repassword: string;
 };
+
+export type LoginFormValues = Omit<RegFormValues, "repassword">;
