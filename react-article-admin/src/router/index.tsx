@@ -17,6 +17,7 @@ import UserAvatar from '@/views/Root/user/Avatar'
 import UserInfo from '@/views/Root/user/Info'
 import { action as userInfoAction } from '@/views/Root/user/Info/index.action'
 import UserPassword from '@/views/Root/user/Password'
+import { action as userPwdAction } from '@/views/Root/user/Password/index.action'
 import { Navigate } from 'react-router'
 
 const router = createBrowserRouter([
@@ -79,6 +80,7 @@ const router = createBrowserRouter([
       {
         path: 'user-pwd',
         element: <UserPassword />,
+        action: userPwdAction,
       },
     ],
     loader: rootLoader,

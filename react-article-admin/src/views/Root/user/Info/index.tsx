@@ -3,11 +3,12 @@ import type { UserInfoValues } from '@/types/user'
 import type { FormProps } from 'antd'
 import { Button, Form, Input, Space } from 'antd'
 import React from 'react'
-import { useSubmit } from 'react-router'
+import { useNavigation, useSubmit } from 'react-router'
 import { useShallow } from 'zustand/react/shallow'
 
 const UserInfo: React.FC = () => {
   const submit = useSubmit()
+  const navigation = useNavigation()
   const onFinish: FormProps<UserInfoValues>['onFinish'] = (values) => {
     submit(values, { method: 'PUT' })
   }
@@ -63,7 +64,11 @@ const UserInfo: React.FC = () => {
 
       <Form.Item label={null}>
         <Space>
-          <Button type="primary" htmlType="submit">
+          <Button
+            type="primary"
+            htmlType="submit"
+            loading={navigation.state !== 'idle' && { delay: 500 }}
+          >
             修改
           </Button>
           <Button
