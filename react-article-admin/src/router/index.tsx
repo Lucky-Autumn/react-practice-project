@@ -15,6 +15,7 @@ import Home from '@/views/Root/Home'
 import { loader as rootLoader } from '@/views/Root/index.loader'
 import UserAvatar from '@/views/Root/user/Avatar'
 import UserInfo from '@/views/Root/user/Info'
+import { action as userInfoAction } from '@/views/Root/user/Info/index.action'
 import UserPassword from '@/views/Root/user/Password'
 import { Navigate } from 'react-router'
 
@@ -69,6 +70,7 @@ const router = createBrowserRouter([
       {
         path: 'user-info',
         element: <UserInfo />,
+        action: userInfoAction,
       },
       {
         path: 'user-avatar',

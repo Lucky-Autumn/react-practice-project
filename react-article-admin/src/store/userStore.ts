@@ -1,5 +1,5 @@
 import { getUserInfoApi } from '@/api/user'
-import type { User } from '@/types/user'
+import type { User, UserInfoValues } from '@/types/user'
 import to from 'await-to-js'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
@@ -9,12 +9,13 @@ type UserStore = {
   user: User | null
   setUser: (user: User) => void
   fetchUser: () => Promise<void>
+  getUserInfo: () => UserInfoValues
   clearUser: () => void
 }
 
 export const useUserStore = create<UserStore>()(
   persist(
-    immer((set) => ({
+    immer((set, get) => ({
       user: null,
       setUser: (user: User) => {
         set((state) => {
@@ -32,6 +33,13 @@ export const useUserStore = create<UserStore>()(
             state.user = userInfo.data
           }
         })
+      },
+      getUserInfo: () => {
+        return {
+          id: get().user?.id || 0,
+          nickname: get().user?.nickname || '',
+          email: get().user?.email || '',
+        }
       },
       clearUser: () => {
         set((state) => {

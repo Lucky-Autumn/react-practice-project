@@ -25,3 +25,9 @@ export type MenuItem = {
   icon: ReactNode
   children?: MenuItem[]
 }
+
+export type UserInfoValues = {
+  readonly id: number
+  nickname?: string
+  email?: string
+}
