@@ -42,7 +42,7 @@ const UserAvatar: FC = () => {
   }
 
   return (
-    <Space direction="vertical">
+    <Space orientation="vertical">
       {/* 按需渲染头像组件 */}
       {newAvatar || avatar ? (
         <Avatar size={300} shape="square" src={newAvatar || avatar} />
@@ -52,7 +52,7 @@ const UserAvatar: FC = () => {
         </Avatar>
       )}
 
-      <Space direction="horizontal">
+      <Space orientation="vertical">
         <Button onClick={showDialog}>选择照片</Button>
         <Button
           type="primary"
