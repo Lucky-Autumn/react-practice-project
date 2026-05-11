@@ -1,14 +1,26 @@
-import { createBrowserRouter } from "react-router";
+import { createBrowserRouter } from 'react-router'
 
-import AuthLayuout from "@/components/AuthLayout";
-import Login from "@/views/Login";
-import Reg from "@/views/Reg";
-import Root from "@/views/Root";
-import { action as regAction } from "@/views/Reg/index.action";
-import { action as loginAction } from "@/views/Login/index.action";
+import AuthLayuout from '@/components/AuthLayout'
+import AuthRoot from '@/components/AuthRoot'
+import Login from '@/views/Login'
+import { action as loginAction } from '@/views/Login/index.action'
+import Reg from '@/views/Reg'
+import { action as regAction } from '@/views/Reg/index.action'
+import Root from '@/views/Root'
+import ArticleAdd from '@/views/Root/article/Add'
+import ArticleCate from '@/views/Root/article/Cate'
+import ArticleEdit from '@/views/Root/article/Edit'
+import ArticleList from '@/views/Root/article/List'
+import Home from '@/views/Root/Home'
+import { loader as rootLoader } from '@/views/Root/index.loader'
+import UserAvatar from '@/views/Root/user/Avatar'
+import UserInfo from '@/views/Root/user/Info'
+import UserPassword from '@/views/Root/user/Password'
+import { Navigate } from 'react-router'
+
 const router = createBrowserRouter([
   {
-    path: "/login",
+    path: '/login',
     element: (
       <AuthLayuout>
         <Login />
@@ -17,7 +29,7 @@ const router = createBrowserRouter([
     action: loginAction,
   },
   {
-    path: "/reg",
+    path: '/reg',
     element: (
       <AuthLayuout>
         <Reg />
@@ -26,9 +38,49 @@ const router = createBrowserRouter([
     action: regAction,
   },
   {
-    path: "/",
-    element: <Root />,
+    path: '/',
+    element: (
+      <AuthRoot>
+        <Root />
+      </AuthRoot>
+    ),
+    children: [
+      { index: true, element: <Navigate to="/home" replace /> },
+      {
+        path: 'home',
+        element: <Home />,
+      },
+      {
+        path: 'art-cate',
+        element: <ArticleCate />,
+      },
+      {
+        path: 'art-list',
+        element: <ArticleList />,
+      },
+      {
+        path: 'art-add',
+        element: <ArticleAdd />,
+      },
+      {
+        path: 'art-edit/:id',
+        element: <ArticleEdit />,
+      },
+      {
+        path: 'user-info',
+        element: <UserInfo />,
+      },
+      {
+        path: 'user-avatar',
+        element: <UserAvatar />,
+      },
+      {
+        path: 'user-pwd',
+        element: <UserPassword />,
+      },
+    ],
+    loader: rootLoader,
   },
-]);
+])
 
-export default router;
+export default router

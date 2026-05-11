@@ -1,26 +1,45 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
-import { immer } from "zustand/middleware/immer";
+import { create } from 'zustand'
+import { persist } from 'zustand/middleware'
+import { immer } from 'zustand/middleware/immer'
+import { useUserStore } from './userStore'
 
 type AppState = {
-  token: string;
-  setToken: (token: string) => void;
-};
+  token: string
+  collapsed: boolean
+  setToken: (token: string) => void
+  setCollapsed: (collapsed: boolean) => void
+  logout: () => void
+}
 
 export const useAppStore = create<AppState>()(
   persist(
     immer((set) => ({
-      token: "",
+      token: '',
+      collapsed: false,
       setToken: (token: string) => {
         set((state) => {
-          state.token = token;
-        });
+          state.token = token
+        })
+      },
+      setCollapsed: (collapsed: boolean) => {
+        set((state) => {
+          state.collapsed = collapsed
+        })
+      },
+      logout: () => {
+        set((state) => {
+          state.token = ''
+          state.collapsed = false
+          useUserStore.getState().clearUser()
+        })
       },
     })),
     {
-      name: "app-storage",
-      storage: createJSONStorage(() => localStorage),
-      partialize: (state) => ({ token: state.token }),
+      name: 'app-storage',
+      partialize: (state) => ({
+        token: state.token,
+        collapsed: state.collapsed,
+      }),
     },
   ),
-);
+)
