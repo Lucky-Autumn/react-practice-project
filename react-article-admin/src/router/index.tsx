@@ -14,6 +14,7 @@ import ArticleList from '@/views/Root/article/List'
 import Home from '@/views/Root/Home'
 import { loader as rootLoader } from '@/views/Root/index.loader'
 import UserAvatar from '@/views/Root/user/Avatar'
+import { action as userAvatarAction } from '@/views/Root/user/Avatar/index.action'
 import UserInfo from '@/views/Root/user/Info'
 import { action as userInfoAction } from '@/views/Root/user/Info/index.action'
 import UserPassword from '@/views/Root/user/Password'
@@ -76,6 +77,7 @@ const router = createBrowserRouter([
       {
         path: 'user-avatar',
         element: <UserAvatar />,
+        action: userAvatarAction,
       },
       {
         path: 'user-pwd',

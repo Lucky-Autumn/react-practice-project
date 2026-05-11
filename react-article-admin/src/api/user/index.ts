@@ -16,3 +16,7 @@ export const updateUserInfoApi = (userInfo: FormData) => {
 export const updatePwdApi = (data: FormData) => {
   return apiClient.patch<null, ApiResponse>('/my/updatepwd', data)
 }
+
+export const updateAvatarApi = (data: FormData) => {
+  return apiClient.patch<null, ApiResponse>('/my/update/avatar', data)
+}
