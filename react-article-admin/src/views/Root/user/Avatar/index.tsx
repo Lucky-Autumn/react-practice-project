@@ -6,7 +6,7 @@ import { useMemo, useRef, useState } from 'react'
 import { useSubmit } from 'react-router'
 
 const UserAvatar: FC = () => {
-  const user = useUserStore((state) => state.user)
+  const avatar = useUserStore((state) => state.getAvatar())
   const [newAvatar, setNewAvatar] = useState('')
   const iptRef = useRef<HTMLInputElement>(null)
   const submit = useSubmit()
@@ -14,8 +14,8 @@ const UserAvatar: FC = () => {
 
   // 动态计算，并缓存计算的结果
   const isDisabled = useMemo(
-    () => !newAvatar || newAvatar === user.user_pic,
-    [newAvatar, user.user_pic],
+    () => !newAvatar || newAvatar === avatar,
+    [newAvatar, avatar],
   )
 
   const showDialog = () => {
@@ -42,17 +42,17 @@ const UserAvatar: FC = () => {
   }
 
   return (
-    <Space orientation="vertical">
+    <Space direction="vertical">
       {/* 按需渲染头像组件 */}
-      {newAvatar || user.user_pic ? (
-        <Avatar size={300} shape="square" src={newAvatar || user.user_pic} />
+      {newAvatar || avatar ? (
+        <Avatar size={300} shape="square" src={newAvatar || avatar} />
       ) : (
         <Avatar size={300} shape="square" onClick={showDialog}>
           请选择头像
         </Avatar>
       )}
 
-      <Space orientation="vertical">
+      <Space direction="horizontal">
         <Button onClick={showDialog}>选择照片</Button>
         <Button
           type="primary"

@@ -10,6 +10,7 @@ type UserStore = {
   setUser: (user: User) => void
   fetchUser: () => Promise<void>
   getUserInfo: () => UserInfoValues
+  getAvatar: () => string
   clearUser: () => void
 }
 
@@ -40,6 +41,9 @@ export const useUserStore = create<UserStore>()(
           nickname: get().user?.nickname || '',
           email: get().user?.email || '',
         }
+      },
+      getAvatar: () => {
+        return get().user?.user_pic || ''
       },
       clearUser: () => {
         set((state) => {

@@ -1,3 +1,4 @@
+import { useAppStore } from '@/store/appStore'
 import type { FormProps } from 'antd'
 import { Button, Form, Input, Space } from 'antd'
 import React, { useEffect } from 'react'
@@ -10,6 +11,7 @@ type FieldType = {
 }
 
 const UserPassword: React.FC = () => {
+  const logout = useAppStore((state) => state.logout)
   const submit = useSubmit()
   const navigation = useNavigation()
   const actionData = useActionData()
@@ -20,8 +22,9 @@ const UserPassword: React.FC = () => {
   useEffect(() => {
     if (actionData?.result) {
       form.resetFields()
+      logout()
     }
-  }, [actionData, form])
+  }, [actionData, form, logout])
   return (
     <Form
       form={form}
