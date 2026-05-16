@@ -1,0 +1,15 @@
+.login {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #fff;
+  .login-wrapper {
+    width: 500px;
+    .title {
+      margin-bottom: 30px;
+      font-size: 30px;
+      text-align: center;
+    }
+  }
+}
